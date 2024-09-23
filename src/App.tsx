@@ -1,8 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import ClassComponent from './ClassComponent'
-import FunctionalComponent from './FunctionalComponent'
+import ClassComponent from './component/ClassComponent'
+import FunctionalComponent from './component/FunctionalComponent'
 
 interface IUser {
   name: string;
