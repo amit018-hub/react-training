@@ -1,40 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import ClassComponent from './component/ClassComponent'
-import FunctionalComponent from './component/FunctionalComponent'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import './scss/App.scss';
+import LoginPage from './pages/Login/LoginPage';
+import { Suspense } from 'react';
+import LoadingSpinner from './components/UI/LoadingSpinner';
+import NotFound from './pages/NotFound/NotFound';
+import AuthLayout from './layouts/AuthLayout';
+import MainLayout from './layouts/MainLayout';
+import DashboardPage from './pages/Dashboard/DashboardPage';
 
-interface IUser {
-  name: string;
-  age: number;
-}
-
-interface UserSub {
-  iusers: IUser[];
-  iusers2: IUser[];
-}
-
-
-
-  
 function App() {
-  const users: IUser[] = [
-    { name: "John Doe", age: 30 },
-    { name: "Alice", age: 25 },
-    { name: "Bob", age: 32 }
-  ];
-
-  const users2: IUser[] = [
-    { name: "Alice", age: 25 },
-    { name: "Bob", age: 32 }
-  ];
   return (
-    <div className="App">
-         <ClassComponent iusers={users} iusers2={users2} />
-        {/* <FunctionalComponent iusers={users} iusers2={users2} />  */}
-
-        
-    </div>
+    <BrowserRouter>
+      <Suspense fallback={<LoadingSpinner />}>
+        <Routes>
+          <Route element={<AuthLayout />}>
+            <Route path="/" element={<MainLayout />}>
+              <Route path="*" element={<NotFound />} />
+              <Route path="/dashboard" element={<DashboardPage />} />
+            </Route>
+          </Route>
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
 }
 
