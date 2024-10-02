@@ -44,16 +44,17 @@ const Login: React.FC = () => {
         }
     }
 
-    let hasToken = '';
+    let hasToken = 'hasAccess';
     const handleSubmit = (event: React.FormEvent<HTMLElement>): void => {
+        debugger;
         event.preventDefault();
         const email = userNameRef?.current?.value || '';
         const password = passwordRef?.current?.value || '';
-        loginAPi();
-        hasToken = authService.getItem('token') || ''
+        //loginAPi();
+       // hasToken = authService.getItem('token') || ''
         if (hasToken !== '') {
             if (hasToken) {
-                loginCtx.toggleLogin();
+               loginCtx.toggleLogin();
                 navigate("/");
             } else {
                 // userNameRef.current.focus();

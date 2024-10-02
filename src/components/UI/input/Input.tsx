@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 interface Props {
   id: string;
   type: string;
+  name:string;
   minLength?: number;
   maxLength?: number;
   placeholder?: string;
@@ -44,6 +45,7 @@ const Input = React.forwardRef<IImperativeHandler, Props>((props, ref) => {
       <label htmlFor={props.id}>{t(`${props.id}`)}</label>
       <input
         ref={inputRef}
+        name={props.name}
         id={props.id}
         minLength={props.minLength}
         maxLength={props.maxLength}

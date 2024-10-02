@@ -7,7 +7,7 @@ import NotFound from './pages/NotFound/NotFound';
 import AuthLayout from './layouts/AuthLayout';
 import MainLayout from './layouts/MainLayout';
 import DashboardPage from './pages/Dashboard/DashboardPage';
-
+import CustomerPage from './pages/Customer/CustomerPage';
 function App() {
   return (
     <BrowserRouter>
@@ -17,6 +17,7 @@ function App() {
             <Route path="/" element={<MainLayout />}>
               <Route path="*" element={<NotFound />} />
               <Route path="/dashboard" element={<DashboardPage />} />
+              <Route path="/customers" element={<CustomerPage />} />
             </Route>
           </Route>
           <Route path="/login" element={<LoginPage />} />
