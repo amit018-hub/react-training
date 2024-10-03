@@ -12,7 +12,7 @@ export interface ICreateEditPageProps {
  onCancel: () => void;
 }
 
-const navigate = useNavigate();
+
 const SaveCustomer: React.FC<ICreateEditPageProps> = ({
  crudOperations,
  initialUser,
@@ -32,7 +32,7 @@ const SaveCustomer: React.FC<ICreateEditPageProps> = ({
   }
  });
 
-
+ const navigate = useNavigate();
  const [isSaving, setIsSaving] = useState(false);
 
  useEffect(() => {

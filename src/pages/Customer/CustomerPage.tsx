@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import CustomerList from "../../components/customers/CustomerList";
 import { CustomerOperationService } from "../../components/services/CustomerOperationService";
 import { IUser } from "../../components/models/IUser";
+import { SaveCustomer } from "../../components/customers/SaveCustomer";
 function CustomerPage() {
  
   const crudOperations = new CustomerOperationService();
@@ -14,7 +15,9 @@ function CustomerPage() {
   const handleEdit = (user: IUser) => {
     navigate(`/customers/SaveCustomer/${user.sno}`);
   };
-
+  const handleCancel = () => {
+    navigate(`/customers`);
+  };
   const handleDelete = async (id: number) => {
     try {
       await crudOperations.deleteUser(id);
@@ -31,6 +34,11 @@ function CustomerPage() {
         onEdit={handleEdit}
         onDelete={handleDelete}
       />
+      <SaveCustomer  
+        crudOperations={crudOperations}
+        onSave={handleCreate} 
+        onCancel={handleCancel}
+        />
     </section>
   );
 }
