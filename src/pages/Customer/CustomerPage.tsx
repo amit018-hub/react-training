@@ -3,21 +3,19 @@ import { useNavigate } from "react-router-dom";
 import CustomerList from "../../components/customers/CustomerList";
 import { CustomerOperationService } from "../../components/services/CustomerOperationService";
 import { IUser } from "../../components/models/IUser";
-import { SaveCustomer } from "../../components/customers/SaveCustomer";
+
 function CustomerPage() {
- 
+  debugger;
   const crudOperations = new CustomerOperationService();
   const navigate = useNavigate();
   const handleCreate = () => {
-     navigate("/customers/SaveCustomer");
+     navigate("/customers/save");
   };
 
   const handleEdit = (user: IUser) => {
-    navigate(`/customers/SaveCustomer/${user.sno}`);
+    navigate(`/customers/edit/${user.sno}`);
   };
-  const handleCancel = () => {
-    navigate(`/customers`);
-  };
+ 
   const handleDelete = async (id: number) => {
     try {
       await crudOperations.deleteUser(id);
@@ -28,17 +26,17 @@ function CustomerPage() {
 
   return (
     <section>
+        <h2>Customer List</h2>
+        <div className="p-2 float-end">
+        <button className="btn btn-primary" onClick={handleCreate}>Create New User</button>
+      </div>
       <CustomerList
         crudOperations={crudOperations}
         onCreate={handleCreate}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />
-      <SaveCustomer  
-        crudOperations={crudOperations}
-        onSave={handleCreate} 
-        onCancel={handleCancel}
-        />
+    
     </section>
   );
 }

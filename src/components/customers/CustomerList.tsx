@@ -50,7 +50,8 @@ const CustomerList: React.FC<IListPageProps> = ({ crudOperations, onCreate, onEd
 
   return (
     <div>
-      <h2>Customer List</h2>
+     
+      
       {isLoading ? (
         <p>Loading...</p>
       ) : (
@@ -75,14 +76,14 @@ const CustomerList: React.FC<IListPageProps> = ({ crudOperations, onCreate, onEd
                 <td>{`${user.address.street}, ${user.address.city}, ${user.address.localarea}, ${user.address.zip}`}</td>
                 <td>
                   <button className="btn btn-success" onClick={() => handleEdit(user)}>Edit</button>
-                  <button className="btn btn-danger" onClick={() => handleDelete(user.sno)}>Delete</button>
+                  <button className="btn btn-danger mr-2" onClick={() => handleDelete(user.sno)}>Delete</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
-      <button className="btn btn-primary" onClick={handleCreate}>Create New User</button>
+     
     </div>
   );
 };

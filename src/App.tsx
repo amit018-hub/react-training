@@ -8,6 +8,7 @@ import AuthLayout from './layouts/AuthLayout';
 import MainLayout from './layouts/MainLayout';
 import DashboardPage from './pages/Dashboard/DashboardPage';
 import CustomerPage from './pages/Customer/CustomerPage';
+import SaveCustomerPage from './pages/Customer/SaveCustomerPage';
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +19,8 @@ function App() {
               <Route path="*" element={<NotFound />} />
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/customers" element={<CustomerPage />} />
+              <Route path="/customers/save" element={<SaveCustomerPage />} />
+              <Route path="/customers/edit/:id" element={<SaveCustomerPage />} />
             </Route>
           </Route>
           <Route path="/login" element={<LoginPage />} />
