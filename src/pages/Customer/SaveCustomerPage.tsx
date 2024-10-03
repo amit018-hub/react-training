@@ -29,18 +29,7 @@ function SaveCustomerPage() {
     }
   }, [id]);
 
-  const handleSave = async (userData: IUser) => {
-    try {
-      if (id) {
-        await crudOperations.updateUser(userData);
-      } else {
-        await crudOperations.createUser(userData);
-      }
-      navigate("/customers");
-    } catch (error) {
-      console.error("Error saving user:", error);
-    }
-  };
+
 
   const handleCancel = () => {
     navigate("/customers");
@@ -50,7 +39,6 @@ function SaveCustomerPage() {
     <SaveCustomer
      initialUser={user}
       crudOperations={crudOperations}
-      onSave={handleSave}
       onCancel={handleCancel}
     />
   );

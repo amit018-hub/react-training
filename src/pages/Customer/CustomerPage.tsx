@@ -32,7 +32,6 @@ function CustomerPage() {
       </div>
       <CustomerList
         crudOperations={crudOperations}
-        onCreate={handleCreate}
         onEdit={handleEdit}
         onDelete={handleDelete}
       />

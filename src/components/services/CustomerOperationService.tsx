@@ -1,6 +1,9 @@
 import { ICustomerOperations } from "./ICustomerOperations";
 import { UserData } from "../staticdata/UserList";
 import { IUser } from "../models/IUser";
+//import axios from 'axios';
+
+//const API_BASE_URL = 'https://your-api-base-url.com/api';
 
 export class CustomerOperationService implements ICustomerOperations {
   async getAllUsers(): Promise<IUser[]> {
@@ -12,8 +15,10 @@ export class CustomerOperationService implements ICustomerOperations {
   }
 
   async createUser(user: IUser): Promise<IUser> {
-    UserData.users.push(user);
-    return Promise.resolve(user);
+    const maxSno = Math.max(0, ...UserData.users.map(u => u.sno));
+    const newUser = { ...user, sno: maxSno + 1 };
+    UserData.users.push(newUser);
+    return Promise.resolve(newUser);
   }
 
   async updateUser(user: IUser): Promise<IUser> {
@@ -35,4 +40,29 @@ export class CustomerOperationService implements ICustomerOperations {
       return Promise.reject(new Error("User not found"));
     }
   }
+
+
+  //async getAllUsers(): Promise<IUser[]> {
+  //  const response = await axios.get<IUser[]>(`${API_BASE_URL}/users`);
+  //  return response.data;
+  //}
+
+  //async getUserById(id: number): Promise<IUser | undefined> {
+  //  const response = await axios.get<IUser>(`${API_BASE_URL}/users/${id}`);
+  //  return response.data;
+  //}
+
+  //async createUser(user: IUser): Promise<IUser> {
+  //  const response = await axios.post<IUser>(`${API_BASE_URL}/users`, user);
+  //  return response.data;
+  //}
+
+  //async updateUser(user: IUser): Promise<IUser> {
+  //  const response = await axios.put<IUser>(`${API_BASE_URL}/users/${user.sno}`, user);
+  //  return response.data;
+  //}
+
+  //async deleteUser(id: number): Promise<void> {
+  //  await axios.delete(`${API_BASE_URL}/users/${id}`);
+  //}
 }

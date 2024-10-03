@@ -5,12 +5,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface IListPageProps {
   crudOperations: ICustomerOperations;
-  onCreate: () => void;
   onEdit: (user: IUser) => void;
   onDelete: (id: number) => void;
 }
 
-const CustomerList: React.FC<IListPageProps> = ({ crudOperations, onCreate, onEdit }) => {
+const CustomerList: React.FC<IListPageProps> = ({ crudOperations, onEdit }) => {
   const [users, setUsers] = useState<IUser[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
@@ -28,10 +27,10 @@ const CustomerList: React.FC<IListPageProps> = ({ crudOperations, onCreate, onEd
     fetchUsers();
   }, [crudOperations]);
 
-  const handleCreate = () => {
-    onCreate();
+  // const handleCreate = () => {
+  //   onCreate();
    
-  };
+  // };
 
   const handleEdit = (user: IUser) => {
     onEdit(user);
@@ -75,8 +74,8 @@ const CustomerList: React.FC<IListPageProps> = ({ crudOperations, onCreate, onEd
                 <td>{user.gender}</td>
                 <td>{`${user.address.street}, ${user.address.city}, ${user.address.localarea}, ${user.address.zip}`}</td>
                 <td>
-                  <button className="btn btn-success" onClick={() => handleEdit(user)}>Edit</button>
-                  <button className="btn btn-danger mr-2" onClick={() => handleDelete(user.sno)}>Delete</button>
+                  <button className="btn btn-success me-2" onClick={() => handleEdit(user)}>Edit</button>
+                  <button className="btn btn-danger" onClick={() => handleDelete(user.sno)}>Delete</button>
                 </td>
               </tr>
             ))}

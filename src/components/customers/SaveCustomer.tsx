@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { ICustomerOperations } from "../services/ICustomerOperations";
 import { IUser } from "../models/IUser";
@@ -7,14 +7,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 export interface ICreateEditPageProps {
   crudOperations: ICustomerOperations;
   initialUser: IUser | null;
-  onSave: (user: IUser) => void;
   onCancel: () => void;
 }
 
 const SaveCustomer: React.FC<ICreateEditPageProps> = ({
   crudOperations,
   initialUser,
-  onSave,
   onCancel,
 }) => {
   const [user, setUser] = useState<IUser>(
@@ -22,7 +20,7 @@ const SaveCustomer: React.FC<ICreateEditPageProps> = ({
       sno: 0,
       name: "",
       age: 0,
-      gender: "Unspecified",
+      gender: "",
       address: {
         street: "",
         city: "",
@@ -40,9 +38,10 @@ const SaveCustomer: React.FC<ICreateEditPageProps> = ({
       setUser(initialUser);
     }
   }, [initialUser]);
-
+  const isSubmitting = useRef(false);
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (isSubmitting.current) return;
     setIsSaving(true);
     try {
       let savedUser: IUser | null;
@@ -52,7 +51,7 @@ const SaveCustomer: React.FC<ICreateEditPageProps> = ({
         savedUser = await crudOperations.createUser(user);
       }
       if (savedUser) {
-        onSave(savedUser);
+        //onSave(savedUser);
         navigate("/customers");
       } else {
         console.error("Error saving user:", savedUser);
@@ -61,6 +60,7 @@ const SaveCustomer: React.FC<ICreateEditPageProps> = ({
       console.error("Error saving user:", error);
     } finally {
       setIsSaving(false);
+      isSubmitting.current = false;
     }
   };
 
@@ -105,6 +105,7 @@ const SaveCustomer: React.FC<ICreateEditPageProps> = ({
                   value={user.gender}
                   onChange={(e) => setUser({ ...user, gender: e.target.value })}
                 >
+                  <option value="">Select</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                   <option value="Other">Other</option>
@@ -181,16 +182,17 @@ const SaveCustomer: React.FC<ICreateEditPageProps> = ({
             </div>
           </div>
 
-          <div className="p-3 float-left">
+          <div className="p-3 ">
+           
+            <button className="btn btn-danger float-end" onClick={onCancel}>
+              Cancel
+            </button>
             <button
-              className="btn btn-primary"
+              className="btn btn-primary me-2 float-end"
               type="submit"
               disabled={isSaving}
             >
               {isSaving ? "Saving..." : "Save"}
-            </button>
-            <button className="btn btn-danger" onClick={onCancel}>
-              Cancel
             </button>
           </div>
         </div>
