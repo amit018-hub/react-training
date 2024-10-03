@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { ICustomerOperations } from "../services/ICustomerOperations";
 import { IUser } from "../models/IUser";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 interface IListPageProps {
   crudOperations: ICustomerOperations;
@@ -53,7 +54,7 @@ const CustomerList: React.FC<IListPageProps> = ({ crudOperations, onCreate, onEd
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <table>
+        <table className="table table-bordered data-table">
           <thead>
             <tr>
               <th>SNo</th>
@@ -73,15 +74,15 @@ const CustomerList: React.FC<IListPageProps> = ({ crudOperations, onCreate, onEd
                 <td>{user.gender}</td>
                 <td>{`${user.address.street}, ${user.address.city}, ${user.address.localarea}, ${user.address.zip}`}</td>
                 <td>
-                  <button onClick={() => handleEdit(user)}>Edit</button>
-                  <button onClick={() => handleDelete(user.sno)}>Delete</button>
+                  <button className="btn btn-success" onClick={() => handleEdit(user)}>Edit</button>
+                  <button className="btn btn-danger" onClick={() => handleDelete(user.sno)}>Delete</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
-      <button onClick={handleCreate}>Create New User</button>
+      <button className="btn btn-primary" onClick={handleCreate}>Create New User</button>
     </div>
   );
 };

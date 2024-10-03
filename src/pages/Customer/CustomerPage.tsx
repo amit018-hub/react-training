@@ -4,9 +4,9 @@ import CustomerList from "../../components/customers/CustomerList";
 import { CustomerOperationService } from "../../components/services/CustomerOperationService";
 import { IUser } from "../../components/models/IUser";
 function CustomerPage() {
-  const navigate = useNavigate();
+ 
   const crudOperations = new CustomerOperationService();
-
+  const navigate = useNavigate();
   const handleCreate = () => {
      navigate("/customers/SaveCustomer");
   };
