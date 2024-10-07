@@ -37,7 +37,7 @@ function SaveCustomerPage() {
 
   return (
     <SaveCustomer
-     initialUser={user}
+      initialUser={user}
       crudOperations={crudOperations}
       onCancel={handleCancel}
     />

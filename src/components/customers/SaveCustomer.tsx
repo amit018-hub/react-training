@@ -51,7 +51,6 @@ const SaveCustomer: React.FC<ICreateEditPageProps> = ({
         savedUser = await crudOperations.createUser(user);
       }
       if (savedUser) {
-        //onSave(savedUser);
         navigate("/customers");
       } else {
         console.error("Error saving user:", savedUser);
